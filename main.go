@@ -23,10 +23,14 @@ func main() {
 	http.HandleFunc("/sign_up_user", sign_up_user)
 	http.HandleFunc("/results", results)
 	http.HandleFunc("/home", home)
+	http.HandleFunc("/update_max_cal_goal", update_max_cal_goal)
 
 
 	http.ListenAndServe(":8000", nil)
 
+
+	/*
+	
     // Start DB logic and Capture connection properties.
     cfg := mysql.Config{
         User:   os.Getenv("DBUSER"),
@@ -37,6 +41,8 @@ func main() {
 		AllowNativePasswords: true,
     }
 
+
+	
     // Get a database handle.
     var err error
     db, err = sql.Open("mysql", cfg.FormatDSN())
@@ -86,6 +92,7 @@ func main() {
 
 	defer db.Close()
 
+	*/
 }
 
 func add_user(username string, password string, maxCalorieGoal int) bool {
@@ -294,6 +301,50 @@ func updateTotalDayCalories(day string, totalCalories int) error {
 		VALUES (?, ?) 
 		ON DUPLICATE KEY UPDATE total_calorie_amount = ?`, day, totalCalories, totalCalories)
 	return err
+}
+
+// Updates the max calorie goal of the user
+func update_max_cal_goal(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	var fname = r.Form["fname"]
+	var maxCalGoal = r.Form["maxCalGoal"]
+	maxCalorieGoal, err := strconv.Atoi(maxCalGoal[0])
+	if err != nil {
+		panic(err)
+	}
+
+	if (update_max_calorie_goal(fname[0], maxCalorieGoal)) {
+		var tmplate = template.Must(template.ParseFiles("templates/index.html"))
+		tmplate.Execute(w, nil)
+	} else {
+		var tmplate = template.Must(template.ParseFiles("templates/error.html"))
+		tmplate.Execute(w, nil)
+	}
+}
+
+func update_max_calorie_goal(fname string, maxCalGoal int) bool {
+	cfg := mysql.Config{
+        User:   os.Getenv("DBUSER"),
+        Passwd: os.Getenv("DBPASS"),
+        Net:    "tcp",
+        Addr:   "127.0.0.1:3306",
+        DBName: "food_data",
+		AllowNativePasswords: true,
+    }
+
+	db,err := sql.Open("mysql", cfg.FormatDSN())
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = db.Exec(`UPDATE Users SET MaxCalorieGoal = ? WHERE Name = ?`, maxCalGoal, fname)
+	if err != nil {
+		return false
+	}
+
+	defer db.Close()
+	return true
+
 }
 
 func calculate_total_calories(date string, food_item string, calories int) bool {
