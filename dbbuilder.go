@@ -8,7 +8,7 @@ import (
 
 
 
-func main() {
+func dbbuilder() {
 
 	cfg := mysql.Config {
         User:   os.Getenv("DBUSER"),

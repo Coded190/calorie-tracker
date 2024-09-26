@@ -16,6 +16,89 @@ import (
 var db *sql.DB
 var curCalGoal int
 
+func main() {
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+	http.HandleFunc("/", login)
+	http.HandleFunc("/sign_up", sign_up)
+	http.HandleFunc("/login_user", login_user)
+	http.HandleFunc("/sign_up_user", sign_up_user)
+	http.HandleFunc("/results", results)
+	http.HandleFunc("/home", home)
+	http.HandleFunc("/update_max_cal_goal", update_max_cal_goal)
+
+
+	http.ListenAndServe(os.Getenv("PORT"), nil)
+
+
+	/*
+	
+    // Start DB logic and Capture connection properties.
+    cfg := mysql.Config{
+        User:   os.Getenv("DBUSER"),
+        Passwd: os.Getenv("DBPASS"),
+        Net:    "tcp",
+        Addr:   "127.0.0.1:3306",
+        DBName: "food_data",
+		AllowNativePasswords: true,
+    }
+
+
+	
+    // Get a database handle.
+    var err error
+    db, err = sql.Open("mysql", cfg.FormatDSN())
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    pingErr := db.Ping()
+    if pingErr != nil {
+        log.Fatal(pingErr)
+    }
+    fmt.Println("Connected!")
+
+
+
+
+
+
+	firstName, lastName, maxCalorieGoal := greetUser()
+	curCalorieGoal := maxCalorieGoal
+	fmt.Printf("Hello, %s %s, let's get you to your calorie goal of %d calories!\n", firstName, lastName, curCalorieGoal)
+
+	for {
+		food, calories, day := getUserFood()
+		curCalorieGoal -= calories
+
+		totalCalories, err := calculateTotalCaloriesForDay(day)
+		if err != nil {
+			log.Fatal("Error calculating total calories: ", err)
+		}
+
+		err = updateTotalDayCalories(day, totalCalories)
+		if err != nil {
+			log.Fatal("Error updating total_day_calorie table: ", err)
+		}
+
+		fmt.Printf("Total calories for %s: %d\n", day, totalCalories)
+
+		if curCalorieGoal > 0 {
+			fmt.Printf("The %s you ate left you with %d calories left to reach your goal\n", food, curCalorieGoal)
+		} else {
+			fmt.Printf("Congrats you have reached your goal of %d calories\n", maxCalorieGoal)
+			fmt.Printf("The %s you ate put you over your goal by %d calories\n", food, curCalorieGoal * -1)
+			break
+		}
+	}
+
+	defer db.Close()
+
+	*/
+}
 
 
 func add_user(username string, password string, maxCalorieGoal int) bool {
@@ -311,86 +394,3 @@ func calculate_total_calories(date string, food_item string, calories int) bool 
 }
 
 
-func main() {
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		panic(err)
-	}
-	http.HandleFunc("/", login)
-	http.HandleFunc("/sign_up", sign_up)
-	http.HandleFunc("/login_user", login_user)
-	http.HandleFunc("/sign_up_user", sign_up_user)
-	http.HandleFunc("/results", results)
-	http.HandleFunc("/home", home)
-	http.HandleFunc("/update_max_cal_goal", update_max_cal_goal)
-
-
-	http.ListenAndServe(os.Getenv("PORT"), nil)
-
-
-	/*
-	
-    // Start DB logic and Capture connection properties.
-    cfg := mysql.Config{
-        User:   os.Getenv("DBUSER"),
-        Passwd: os.Getenv("DBPASS"),
-        Net:    "tcp",
-        Addr:   "127.0.0.1:3306",
-        DBName: "food_data",
-		AllowNativePasswords: true,
-    }
-
-
-	
-    // Get a database handle.
-    var err error
-    db, err = sql.Open("mysql", cfg.FormatDSN())
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    pingErr := db.Ping()
-    if pingErr != nil {
-        log.Fatal(pingErr)
-    }
-    fmt.Println("Connected!")
-
-
-
-
-
-
-	firstName, lastName, maxCalorieGoal := greetUser()
-	curCalorieGoal := maxCalorieGoal
-	fmt.Printf("Hello, %s %s, let's get you to your calorie goal of %d calories!\n", firstName, lastName, curCalorieGoal)
-
-	for {
-		food, calories, day := getUserFood()
-		curCalorieGoal -= calories
-
-		totalCalories, err := calculateTotalCaloriesForDay(day)
-		if err != nil {
-			log.Fatal("Error calculating total calories: ", err)
-		}
-
-		err = updateTotalDayCalories(day, totalCalories)
-		if err != nil {
-			log.Fatal("Error updating total_day_calorie table: ", err)
-		}
-
-		fmt.Printf("Total calories for %s: %d\n", day, totalCalories)
-
-		if curCalorieGoal > 0 {
-			fmt.Printf("The %s you ate left you with %d calories left to reach your goal\n", food, curCalorieGoal)
-		} else {
-			fmt.Printf("Congrats you have reached your goal of %d calories\n", maxCalorieGoal)
-			fmt.Printf("The %s you ate put you over your goal by %d calories\n", food, curCalorieGoal * -1)
-			break
-		}
-	}
-
-	defer db.Close()
-
-	*/
-}
