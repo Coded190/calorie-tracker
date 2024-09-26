@@ -18,10 +18,15 @@ var curCalGoal int
 
 func main() {
 
-	err := godotenv.Load(".env")
-	if err != nil {
-		panic(err)
-	}
+	// Loading the .env file in my local development environment
+    if os.Getenv("PORT") == "" {
+        err := godotenv.Load(".env")
+        if err != nil {
+            panic(err) 
+        }
+    }
+
+
 	http.HandleFunc("/", login)
 	http.HandleFunc("/sign_up", sign_up)
 	http.HandleFunc("/login_user", login_user)
