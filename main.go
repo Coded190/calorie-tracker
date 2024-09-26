@@ -26,6 +26,7 @@ func main() {
         }
     }
 
+	log.Println("Starting server...")
 
 	http.HandleFunc("/", login)
 	http.HandleFunc("/sign_up", sign_up)
@@ -35,9 +36,12 @@ func main() {
 	http.HandleFunc("/home", home)
 	http.HandleFunc("/update_max_cal_goal", update_max_cal_goal)
 
-
-	http.ListenAndServe(os.Getenv("PORT"), nil)
-
+    port := os.Getenv("PORT")
+    log.Println("Starting server on port", port)
+    err := http.ListenAndServe(port, nil)
+    if err != nil {
+        log.Fatal("ListenAndServe failed:", err)
+    }
 
 	/*
 	
