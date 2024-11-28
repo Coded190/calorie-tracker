@@ -1,34 +1,124 @@
 <!DOCTYPE html>
-<html>
-<h1>Home Page</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <style>
+        body, h1, p, form {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-<p>Welcome to the home page. Please enter your food and calorie information!</p>
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
 
-<form name="results" action="/results" method="POST">
-    <label for="date">Date of Desired Entry (YYYY-MM-DD):</label>
-    <input type="text" id="date" name="date"><br><br>
-    
-    <label for="food_item">Food Item:</label>
-    <input type="text" id="food_item" name="food_item"><br><br>
-    
-    <label for="calories">Calories of Food Item:</label>
-    <input type="text" id="calories" name="calories"><br><br>
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
 
-    <input type="submit" value="Submit">
-</form>
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
 
-<br><br>
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: center;
+        }
 
-<p>Want to update your max calorie goal?</p>
+        form {
+            margin-bottom: 20px;
+        }
 
-<form name="MaxCalGoal" action="/update_max_cal_goal" method="POST">
-    <label for="fname">First Name:</label>
-    <input type="text" id="fname" name="fname"><br><br>
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    <label for="maxCalGoal">Max Calorie Goal:</label>
-    <input type="text" id="maxCalGoal" name="maxCalGoal"><br><br>
-    
-    <input type="submit" value="Submit">
-</form>
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
 
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            margin-bottom: 10px;
+            color: #3b3b3b;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Home Page</h1>
+        <p>Welcome to the home page. Please enter your food and calorie information!</p>
+
+        <div class="form-section">
+            <h2>Food Entry</h2>
+            <form name="results" action="/results" method="POST">
+                <label for="date">Date of Desired Entry (YYYY-MM-DD):</label>
+                <input type="text" id="date" name="date">
+
+                <label for="food_item">Food Item:</label>
+                <input type="text" id="food_item" name="food_item">
+
+                <label for="calories">Calories of Food Item:</label>
+                <input type="text" id="calories" name="calories">
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Update Max Calorie Goal</h2>
+            <p>Want to update your max calorie goal?</p>
+            <form name="MaxCalGoal" action="/update_max_cal_goal" method="POST">
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname">
+
+                <label for="maxCalGoal">Max Calorie Goal:</label>
+                <input type="text" id="maxCalGoal" name="maxCalGoal">
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
 </html>

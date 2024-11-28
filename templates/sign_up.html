@@ -1,24 +1,104 @@
 <!DOCTYPE html>
-<html>
-<h1>Sign Up Page</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body, h1, form {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
 
-<form name="sign_up_user" action="/sign_up_user" method="POST">
-<label for="fname">First Name:</label>
-<input type="text" id="fname" name="fname"><br><br>
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
 
-<label for="Password">Password:</label>
-<input type="password" id="Password" name="Password"><br><br>
+        h1 {
+            text-align: center;
+            color: #3b3b3b;
+            margin-bottom: 20px;
+        }
 
-<label for="maxCalGoal">Max Calorie Goal</label>
-<input type="text" id="maxCalGoal" name="maxCalGoal"><br><br>
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
 
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
 
-<input type="submit" value="Submit">
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-<p>
-    <a href="/">Login Here</a>
-</p>
-</form>
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
 
+        p {
+            text-align: center;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <form name="sign_up_user" action="/sign_up_user" method="POST">
+        <h1>Sign Up Page</h1>
+
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname">
+
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password">
+
+        <label for="maxCalGoal">Max Calorie Goal:</label>
+        <input type="text" id="maxCalGoal" name="maxCalGoal">
+
+        <input type="submit" value="Submit">
+
+        <p>
+            <a href="/">Login Here</a>
+        </p>
+    </form>
+</body>
 </html>

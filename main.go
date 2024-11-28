@@ -38,7 +38,7 @@ func main() {
 
     port := os.Getenv("PORT")
     log.Println("Starting server on port", port)
-    err := http.ListenAndServe(":"+port, nil)
+    err := http.ListenAndServe(port, nil)
     if err != nil {
         log.Fatal("ListenAndServe failed:", err)
     }
