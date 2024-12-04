@@ -5,68 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results Page</title>
     <style>
-        body, h1, p {
+        body, h1, p, form {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
         }
-
+    
         body {
-            background-color: #f4f7fc;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            color: white;
             text-align: center;
-            color: #333;
         }
-
+    
         .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 1200px;
+            padding: 30px;
         }
 
         h1 {
-            font-size: 24px;
-            color: #4CAF50;
+            font-size: 36px;
             margin-bottom: 20px;
+            color: #000000;
         }
 
         p {
+            font-size: 18px;
+            color: #f1f1f1;
+            margin-bottom: 40px;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 24px;
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-size: 16px;
-            line-height: 1.5;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f4f4f4;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #feb47b, #ff7e5f);
+        }
+
+        p {
+            font-size: 14px;
+            color: #777;
+            margin-top: 10px;
         }
 
         a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
+            color: #3498db;
             text-decoration: none;
-            font-size: 16px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         a:hover {
-            background-color: #45a049;
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            input[type="text"], input[type="password"], input[type="submit"] {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Results Page</h1>
+        <div class="form-section">
+            <h1>Results Page</h1>
+            <p>Welcome to the results page! Something went right, hopefully...</p>
 
-        <p>Welcome to the results page! Something went right, hopefully...</p>
-
-        <p>
-            <a href="/home">Back to Home Page</a>
-        </p>
+            <p>
+                <a href="/home">Back to Home Page</a>
+            </p>
+        </div>
     </div>
 </body>
 </html>
