@@ -28,6 +28,9 @@ func main() {
 
 	log.Println("Starting server...")
 
+	fs := http.FileServer(http.Dir("static"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.HandleFunc("/", login)
 	http.HandleFunc("/sign_up", sign_up)
 	http.HandleFunc("/login_user", login_user)
