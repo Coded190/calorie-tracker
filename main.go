@@ -29,7 +29,7 @@ func main() {
 
     err = db.Ping()
     if err != nil {
-        log.Fatal("Error pinging database: ", err)
+        fmt.Println("Error pinging database: ", err)
     }
     fmt.Println("Connected to PostgreSQL")
 
@@ -268,7 +268,7 @@ func update_max_calorie_goal(fname string, maxCalGoal int) bool {
 
 }
 
-func calculate_total_calories(date string, food_item string, calories int) bool {
+func calculate_total_calories(date string, food_item string, calories int) bool { 
 	// Update calorie_stats table
 	_, err := db.Exec("INSERT INTO calorie_stats (day, food_item, calorie_amount) VALUES ($1, $2, $3)", date, food_item, calories)
 	if err != nil {
